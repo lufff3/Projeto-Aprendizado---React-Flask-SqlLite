@@ -1,0 +1,30 @@
+# Node / React
+sistema-frontend/node_modules/
+sistema-frontend/build/
+sistema-frontend/.pnp
+sistema-frontend/.pnp.js
+sistema-frontend/coverage
+
+# misc
+sistema-frontend/.DS_Store
+sistema-frontend/.env.local
+sistema-frontend/.env.development.local
+sistema-frontend/.env.test.local
+sistema-frontend/.env.production.local
+
+sistema-frontend/npm-debug.log*
+sistema-frontend/yarn-debug.log*
+sistema-frontend/yarn-error.log*
+
+
+# Python
+Sistema-Backend/venv/
+Sistema-Backend/__pycache__/
+Sistema-Backend/*.db
+
+# Arquivos de sistema/IDE
+*.log
+.DS_Store
+.env
+
+
