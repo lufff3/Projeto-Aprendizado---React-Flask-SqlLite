@@ -1,11 +1,20 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../api/axios";
+import { AuthContext } from "../../contexts/authenticate";
 
 export const LoginPage = () => {
     const [user, setUser] = useState<string>(""); //Estado para o usuário
     const [password, setPassword] = useState<string>(""); //Estado para a senha
+    const [error, setError] = useState("");
 
-    const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
+
+    if(!authContext){
+        return null;
+    }
+
+    const { login } = authContext;
 
     //Função para atualizar o estado do usuário
     const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,11 +26,25 @@ export const LoginPage = () => {
         setPassword(event.target.value);
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log("Usuario: ", user);
         console.log("Senha: ",password)
+
+        try{
+            const response = await axiosInstance.post('/login', {
+                user,
+                password,
+            });
+
+            login(response.data.token)
+            localStorage.setItem("token", response.data.token);
+            setError('');
+        } catch (err) {
+            setError('Usuário ou senha incorreto')
+        }
     }
+
 
     return(
         <div>
