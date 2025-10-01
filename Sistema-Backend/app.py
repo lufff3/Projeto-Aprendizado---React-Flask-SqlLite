@@ -2,6 +2,8 @@ from flask import Flask
 from flask_cors import CORS
 from config import Config
 from routes.login.login import login
+from routes.register.machines import registermachine
+from routes.register.maintenance import registermaintenance
 
 #Criação do aplicativo Flask
 app = Flask(__name__)
@@ -15,6 +17,12 @@ app.config.from_object(Config)
 #Registrar os Blueprints para as rotas
 #Login
 app.register_blueprint(login)
+
+#Registrar Máquinas
+app.register_blueprint(registermachine)
+
+#Registrar Manutenção
+app.register_blueprint(registermaintenance)
 
 if __name__ == "__main__":
     app.run(debug=True)
